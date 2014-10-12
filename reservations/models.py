@@ -19,7 +19,7 @@ class Customer(models.Model):
 	street_address = models.CharField(max_length=200)
 	postcode = models.CharField(max_length=5) #Finnish postal code length
 	city = models.CharField(max_length=100)
-	phone = models.CharField(max_length=100)
+	phone = models.CharField(max_length=100, null=True, blank=True)
 	discount = models.DecimalField(max_digits=5, decimal_places=2) #999,99 max
 
 class Coach(models.Model):
@@ -45,7 +45,7 @@ class Company(models.Model):
 	city = models.CharField(max_length=100)
 	contact_person = models.CharField(max_length=100)
 	phone = models.CharField(max_length=100)
-	business_id = models.CharField(max_length=100)
-	iban = models.CharField(max_length=100)
+	business_id = models.CharField(max_length=100, null=True, blank=True)
+	iban = models.CharField(max_length=100, null=True, blank=True)
 	location_vat = models.DecimalField(max_digits=10, decimal_places=2)
 
