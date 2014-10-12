@@ -96,3 +96,6 @@ $RECYCLE.BIN/
 
 #Virtual Environment files
 venv/
+
+#DB
+db.sqlite3
