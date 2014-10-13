@@ -1,0 +1,44 @@
+{% load staticfiles %}
+{% load app_filters %}
+<link rel="stylesheet" type="text/css" href="{% static 'cal/style.css' %}" />
+<script src="{% static "cal/js/jquery/jquery.js" %}"></script>
+<script src="{% static "cal/js/calendar.js" %}"></script>
+
+
+<a href="#">&lt;&lt; Prev</a>
+<a href="#">Next &gt;&gt;</a>
+
+<form>
+<table id="calendar">
+    <tr>
+        <th></th>
+    {% for day in weekdates %}
+        <th id="{{day|date:"l"}}">{{day|date:"l j F"}}</th>
+    {% endfor %}
+    </tr>
+    
+    {% for hour in hours %}
+    <tr>
+        <th>{{hour|date:"H:i"}}</th>
+        {% for day in weekdates %}
+        <td headers="{{day|date:"l"}}" id="{{day|combine_datetime:hour}}" class="
+            {% if day|combine_datetime:hour in reservations %}reserved{%endif%}
+            {% if day|combine_datetime:hour not in reservations  and day >= today %}available{%endif%}">
+            {% if day|combine_datetime:hour in reservations %}Super birdy time!{%endif%}
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<input type="button" value="Show reservation details input" id="showInput" />
+
+<div id="reservationDetails">
+    </br>
+    Start time:<input type="text" value="" name="startTime"></br>
+    End time:<input type="text" value="" name="endTime"></br>
+
+    <input type="submit" value="Make reservation">
+</div>
+
+</form>
+

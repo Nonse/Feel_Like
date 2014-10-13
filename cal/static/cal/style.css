@@ -1,0 +1,19 @@
+/*can be refreenced in django as cal/style.css */
+
+
+tr:nth-child(even) {background: #CCC}
+tr:nth-child(odd) {background: #FFF}
+
+td.reserved{background:red}
+td.available:hover{background:#999}
+
+
+table td {
+  background-color:#ccc;
+  border:1px solid #fff;
+}
+
+table td.highlighted {
+  background-color:#999;
+}
+
