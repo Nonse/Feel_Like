@@ -36,7 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reservations'
+    'reservations',
+    'cal'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +54,10 @@ ROOT_URLCONF = 'feel_like.urls'
 
 WSGI_APPLICATION = 'feel_like.wsgi.application'
 
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader'
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
