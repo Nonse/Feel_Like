@@ -1,5 +1,5 @@
 from django import template
-from datetime import datetime, timedelta
+from datetime import *
 
 register = template.Library()
 
@@ -11,4 +11,7 @@ def combine_datetime(date, time):
 @register.filter(name='timedeltaDays')
 def timedeltaDays(day, x):
     day = day + timedelta(x)
+    
+    day = day.strftime('%Y%m%d')
+    
     return day

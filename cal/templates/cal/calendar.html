@@ -5,8 +5,8 @@
 <script src="{% static "cal/js/calendar.js" %}"></script>
 
 
-<a href="#">&lt;&lt; Prev</a>
-<a href="#">Next &gt;&gt;</a>
+<a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:-7  %}">&lt;&lt; Prev</a>
+<a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:7  %}">Next &gt;&gt;</a>
 
 <form>
 <table id="calendar">

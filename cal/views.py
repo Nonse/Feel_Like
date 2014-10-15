@@ -8,11 +8,11 @@ def calendar(request, mondayParam = None):
     #{% url views.calendar weekdates|first|timedeltaDays:-7 %}
     
     #first calendar to load starts on Monday of current week
+    today = date.today()
     if mondayParam == None:
-        today = date.today()
         monday = today - timedelta(days=today.weekday())
     else:
-        monday = mondayParam
+        monday = datetime.strptime(mondayParam, "%Y%m%d").date()
         
     weekdates = [ monday + timedelta(days=x) for x in range(0, 7)] 
     
@@ -24,7 +24,18 @@ def calendar(request, mondayParam = None):
         datetime(2014,10,15,15,00),
         datetime(2014,10,16,15,00),
         datetime(2014,10,16,16,00),
-        datetime(2014,10,17,17,00)]
+        datetime(2014,10,17,17,00),
+        datetime(2014,10,1,14,00),
+        datetime(2014,10,6,15,00),
+        datetime(2014,10,8,15,00),
+        datetime(2014,10,28,16,00),
+        datetime(2014,10,25,17,00)
+        
+        
+        
+        
+        
+        ]
     
     reservations = testDates
     
