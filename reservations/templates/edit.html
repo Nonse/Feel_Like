@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Edit Reservation</title></head>
+
+<body>
+
+<h1>Edit Reservation</h1>
+
+<form method="post">
+	{% csrf_token %}
+	<ul>
+		{{ form.as_ul }}
+	</ul>
+	<input type="submit" name="submit" value="Save changes" />
+</form>
+
+<p id="edit_result">{{ editResult }}</p>
+
+<!-- WTF does this do? -->
+{{ content }}
+
+<!-- Start and end time fields need date pickers attached -->
+
+</body>
+</html>

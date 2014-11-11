@@ -21,17 +21,22 @@ class Customer(models.Model):
 	city = models.CharField(max_length=100)
 	phone = models.CharField(max_length=100, null=True, blank=True)
 	discount = models.DecimalField(max_digits=5, decimal_places=2) #999,99 max
+	def __str__(self):
+		return '%s, %s' % (self.last_name, self.first_name)
 
 class Coach(models.Model):
 	first_name = models.CharField(max_length=100)
 	last_name = models.CharField(max_length=100)
 	phone = models.CharField(max_length=100)
-
+	def __str__(self):
+		return '%s, %s' % (self.last_name, self.first_name)
 
 class Product(models.Model):
 	name = models.CharField(max_length=100)
 	price = models.DecimalField(max_digits=10, decimal_places=2)
 	vat = models.DecimalField(max_digits=10, decimal_places=2)
+	def __str__(self):
+		return '%s' % (self.name)
 
 class Invoice(models.Model):
 	date = models.DateField()
