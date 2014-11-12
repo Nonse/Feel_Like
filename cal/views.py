@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from datetime import * #specify later
+from reservations.models import Reservation 
 
 
     
@@ -17,9 +18,18 @@ def calendar(request, mondayParam = None):
     weekdates = [ monday + timedelta(days=x) for x in range(0, 7)] 
     
     hours = [time(x) for x in range(6, 24)]
+    
+    x = Reservation.objects.all()
+    
+    
+    
+    testDates = [x[y].start_time.replace(tzinfo = None) for y in range(0, len(x))]
+    
+        
+        
 
     #sample reservation datetimes
-    testDates = [datetime(2014,10,13,13,00), 
+    """testDates = [datetime(2014,10,13,13,00), 
         datetime(2014,10,14,14,00),
         datetime(2014,10,15,15,00),
         datetime(2014,10,16,15,00),
@@ -32,16 +42,13 @@ def calendar(request, mondayParam = None):
         datetime(2014,10,25,17,00)
         
         
-        
-        
-        
-        ]
+        ]"""
     
     reservations = testDates
     
 
     
     
-    context = {'weekdates': weekdates, 'hours': hours, 'reservations': reservations, 'today': today}
+    context = {'weekdates': weekdates, 'hours': hours, 'reservations': reservations, 'today': today, 'x' : x}
     
     return render(request, 'cal/calendar.html', context)
