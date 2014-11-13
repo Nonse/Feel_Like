@@ -11,6 +11,7 @@ $(document).ready(function() {
     });
     
     
+    
     //Table drag select from http://jsfiddle.net/Brv6J/3/
     $(function () {
         var isMouseDown = false,

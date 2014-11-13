@@ -63,10 +63,13 @@
     <tr>
         <th>{{hour|date:"H:i"}}</th>
         {% for day in weekdates %}
-        <td headers="{{day|date:"l"}}" id="{{day|combine_datetime:hour}}" class="
-            {% if day|combine_datetime:hour in reservations %}reserved{%endif%}
-            {% if day|combine_datetime:hour not in reservations  and day >= today %}available{%endif%}">
-            {% if day|combine_datetime:hour in reservations %}Super birdy time!{%endif%}
+        <td headers="{{day|date:"l"}}" id="{{day|combine_datetime:hour}}" 
+            {% if  day >= today %}class="available">{%endif%}
+            {% for y in reservations %}
+                {% ifequal  y.start_time day|combine_datetime:hour %}class="reserved" rowspan="{{y.reservationLength}}">
+                    reservation id:{{y.id}}{%endifequal%}
+                    
+            {% endfor%}    
         </td>
         {% endfor %}
     </tr>
@@ -93,27 +96,6 @@
       </div>
 
     </div> <!-- /container -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
    
   </body>
