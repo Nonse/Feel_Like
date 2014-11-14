@@ -63,13 +63,22 @@
     <tr>
         <th>{{hour|date:"H:i"}}</th>
         {% for day in weekdates %}
-        <td headers="{{day|date:"l"}}" id="{{day|combine_datetime:hour}}" 
-            {% if  day >= today %}class="available">{%endif%}
+        <td headers="{{day|date:"l"}}" id="{{day|combine_datetime:hour}}"  
+        
+            {% if day >= today and day|combine_datetime:hour not in startTimes %}class=" available {% endif %}
             {% for y in reservations %}
-                {% ifequal  y.start_time day|combine_datetime:hour %}class="reserved" rowspan="{{y.reservationLength}}">
-                    reservation id:{{y.id}}{%endifequal%}
-                    
-            {% endfor%}    
+                {% if  y.start_time == day|combine_datetime:hour %}class="reserved" rowspan="{{y.reservationLength}}
+                {% endif%}
+            {% endfor%}     
+            ">    
+            {% for y in reservations %}
+                {% if  y.start_time == day|combine_datetime:hour %}
+                    reservation id:{{y.id}}
+                    Coach:{{y.coach.first_name}} {{y.coach.last_name}}
+                    Customer:{{y.customer.first_name}} {{y.customer.last_name}}
+                {% endif %}
+            {% endfor%} 
+            
         </td>
         {% endfor %}
     </tr>
@@ -88,8 +97,6 @@
 </form>
         
       </div>
-
-     
 
       <div class="footer">
         <p>&copy; Feel Like 2014</p>

@@ -25,14 +25,17 @@ def calendar(request, mondayParam = None):
         t = (datetime.combine(d,t) + timedelta(minutes=30)).time()
         hours.append(t)
     
-    
-    reservations = Reservation.objects.all()
+    #query for reservations .select_related gets connects coach and customer tables
+    reservations = Reservation.objects.all().select_related('coach__last_name' 'coach__first_name' 'customer__last_name' 'customer__first_name')
+    startTimes = []
+    for x in reservations:
+        startTimes.append(x.start_time)
     #gets the number of half hours in a reservation and add number as attribute to reservation
     for y in reservations:
         timeDifference = y.end_time - y.start_time 
         reservationLength = timeDifference.seconds / 1800
         setattr(y, "reservationLength", reservationLength)
   
-    context = {'weekdates': weekdates, 'hours': hours, 'reservations': reservations, 'today': today}
+    context = {'weekdates': weekdates, 'hours': hours, 'reservations': reservations, 'startTimes': startTimes, 'today': today}
     
     return render(request, 'cal/calendar.html', context)
