@@ -11,81 +11,81 @@ from django.core.context_processors import csrf
 
 
 def create(request):
-	if request.POST:
-		form = ReservationForm(request.POST)
-		if form.is_valid():
-			form.save()
-			return redirect('/')
-	else:
-		form = ReservationForm()
+    if request.POST:
+        form = ReservationCustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = ReservationCustomerForm()
 
-	args = {}
-	args.update(csrf(request))
-	args['form'] = form
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
 
-	return render(request, 'create.html', args)
+    return render(request, 'create.html', args)
 
 
 def edit(request, reservationId):
-	oldReservation = get_object_or_404(Reservation, id=reservationId)
-	editResult = ''
+    oldReservation = get_object_or_404(Reservation, id=reservationId)
+    editResult = ''
 
-	if request.POST:
-		form = ReservationForm(request.POST, instance=oldReservation)
-		if form.is_valid():
-			form.save()
-			editResult = "Changes saved"
-	else:
-		form = ReservationForm(instance=oldReservation)
+    if request.POST:
+        form = ReservationForm(request.POST, instance=oldReservation)
+        if form.is_valid():
+            form.save()
+            editResult = "Changes saved"
+    else:
+        form = ReservationForm(instance=oldReservation)
 
-	args = {}
-	args.update(csrf(request))
-	args['form'] = form
-	args['editResult'] = editResult
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
+    args['editResult'] = editResult
 
-	return render(request, 'edit.html', args)
+    return render(request, 'edit.html', args)
 
 
 def delete(request, reservationId):
-	# Assuming that delete confirmation will be displayed by the calling page
-	reservation = get_object_or_404(Reservation, id=reservationId).delete()
-	return redirect('/')
+    # Assuming that delete confirmation will be displayed by the calling page
+    reservation = get_object_or_404(Reservation, id=reservationId).delete()
+    return redirect('/')
 
 
 def hello(request, id = None): # For URL testing
-	return HttpResponse("Hello, world.")
+    return HttpResponse("Hello, world.")
 
 
 def customer_list(request):
-	customers = Customer.objects.all()
-	return render(request, 'customer_list.html', {
-		'customers': customers
-	})
+    customers = Customer.objects.all()
+    return render(request, 'customer_list.html', {
+        'customers': customers
+    })
 
 
 def customer_delete(request, id):
-	customer = get_object_or_404(Customer, id=id)
-	customer.delete()
-	return redirect('customer_list')
+    customer = get_object_or_404(Customer, id=id)
+    customer.delete()
+    return redirect('customer_list')
 
 
 # HOW TO DO POST & GET
 # https://docs.djangoproject.com/en/dev/topics/forms/#the-view
 def customer_edit(request, id):
-	customer = get_object_or_404(Customer, id=id)
+    customer = get_object_or_404(Customer, id=id)
 
-	if request.method == 'POST':
-		form = CustomerForm(request.POST, instance=customer)
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, instance=customer)
 
-		if form.is_valid():
-			form.save()
-			return redirect('customer_list')
+        if form.is_valid():
+            form.save()
+            return redirect('customer_list')
 
-	else:
-		form = CustomerForm(instance=customer)
+    else:
+        form = CustomerForm(instance=customer)
 
-	return render(request, 'customer_edit.html', {
-		'customer': customer,
-		'form': form
-		})
+    return render(request, 'customer_edit.html', {
+        'customer': customer,
+        'form': form
+        })
 
