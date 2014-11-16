@@ -1,110 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% load app_filters %}
-<link rel="stylesheet" type="text/css" href="{% static 'cal/style.css' %}" />
 
-<script src="{% static "cal/js/jquery/jquery.js" %}"></script>
+{% block javascript %}
 <script src="{% static "cal/js/calendar.js" %}"></script>
+{% endblock %}
 
-
-
-
-    <title>Feel Like App</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/cal/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/cal/static/bootstrap/css/jumbotron-narrow.css" rel="stylesheet">
-
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">Feel Like</h3>
-      </div>
-
-      <div class="jumbotron">
-        <h1>Calendar Booking</h1>
-        <p class="lead"></p>
+{% block content %}
+<h1>Calendar Booking</h1>
+<p class="lead"></p>
 <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:-7  %}">&lt;&lt; Prev</a>
 <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:7  %}">Next &gt;&gt;</a>
 <form>
-<table id="calendar">
+  <table id="calendar">
     <tr>
-        <th></th>
-    {% for day in weekdates %}
-        <th id="{{day|date:"l"}}">{{day|date:"l j F"}}</th>
-    {% endfor %}
+      <th></th>
+      {% for day in weekdates %}
+      <th id="{{day|date:"l"}}">{{day|date:"l j F"}}</th>
+      {% endfor %}
     </tr>
     
     {% for hour in hours %}
     <tr>
-        <th>{{hour|date:"H:i"}}</th>
-        {% for day in weekdates %}
-        <td headers="{{day|date:"l"}}" id="{{day|combine_datetime:hour}}"  
-        
-            {% if day >= today and day|combine_datetime:hour not in startTimes %}class=" available {% endif %}
-            {% for y in reservations %}
-                {% if  y.start_time == day|combine_datetime:hour %}class="reserved" rowspan="{{y.reservationLength}}
-                {% endif%}
-            {% endfor%}     
-            ">    
-            {% for y in reservations %}
-                {% if  y.start_time == day|combine_datetime:hour %}
-                    reservation id:{{y.id}}
-                    Coach:{{y.coach.first_name}} {{y.coach.last_name}}
-                    Customer:{{y.customer.first_name}} {{y.customer.last_name}}
-                {% endif %}
-            {% endfor%} 
-            
-        </td>
-        {% endfor %}
-    </tr>
+      <th>{{hour|date:"H:i"}}</th>
+      {% for day in weekdates %}
+      <td headers="{{day|date:"l"}}" id="{{day|combine_datetime:hour}}"  
+
+      {% if day >= today and day|combine_datetime:hour not in startTimes %}class=" available {% endif %}
+      {% for y in reservations %}
+      {% if  y.start_time == day|combine_datetime:hour %}class="reserved" rowspan="{{y.reservationLength}}
+      {% endif%}
+      {% endfor%}     
+      ">    
+      {% for y in reservations %}
+      {% if  y.start_time == day|combine_datetime:hour %}
+      reservation id:{{y.id}}
+      Coach:{{y.coach.first_name}} {{y.coach.last_name}}
+      Customer:{{y.customer.first_name}} {{y.customer.last_name}}
+      {% endif %}
+      {% endfor%} 
+
+    </td>
     {% endfor %}
+  </tr>
+  {% endfor %}
 </table>
 <input type="button" value="Show reservation details input" id="showInput" />
 
 <div id="reservationDetails">
-    </br>
-    Start time:<input type="text" value="" name="startTime"></br>
-    End time:<input type="text" value="" name="endTime"></br>
+</br>
+Start time:<input type="text" value="" name="startTime"></br>
+End time:<input type="text" value="" name="endTime"></br>
 
-    <input type="submit" value="Make reservation">
+<input type="submit" value="Make reservation">
 </div>
 
 </form>
-        
-      </div>
-
-      <div class="footer">
-        <p>&copy; Feel Like 2014</p>
-      </div>
-
-    </div> <!-- /container -->
-
-   
-  </body>
-</html>
-
+{% endblock %}

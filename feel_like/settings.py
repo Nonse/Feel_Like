@@ -59,6 +59,10 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader'
 )
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'feel_like/templates'),
+)
+
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
