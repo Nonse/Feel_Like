@@ -1,7 +1,8 @@
 from django import forms
-from reservations.models import Reservation
+from reservations.models import *
 
-class ReservationForm (forms.ModelForm):
+
+class ReservationForm(forms.ModelForm):
 	class Meta:
 		model = Reservation
 		# To limit the set of displayed fields use:
@@ -9,3 +10,7 @@ class ReservationForm (forms.ModelForm):
 		# (or list the needed ones with "fields = ")
 
 
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+    
