@@ -64,7 +64,7 @@ class ReservationCustomerForm(forms.ModelForm):
                 self.fields[field].required = False
 
     def full_clean(self):
-        if not self.data.get('customer'):
+        if self.data and not self.data.get('customer'):
             customer_data = {}
             for field in CUSTOMER_FIELDS:
                 customer_data[field] = self.data[field]
