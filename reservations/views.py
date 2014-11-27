@@ -10,33 +10,27 @@ from django.core.context_processors import csrf
 # Redirect to home page instead of 404 if reservation not found?
 
 class ReservationInvoice:
-	def __init__(self, reservation, invoice):
-		self.reservation = reservation
-		self.invoice = invoice
+    def __init__(self, reservation, invoice):
+        self.reservation = reservation
+        self.invoice = invoice
 
 
 def list(request):
-	reservations = Reservation.objects.all()
-	invoices = Invoice.objects.all()
+    reservations = Reservation.objects.all()
+    invoices = Invoice.objects.all()
 
-	invoiced = []
-	not_invoiced = []
-	res_inv = []
-	
-	for r in reservations:
-		i = invoices.filter(reservation_id = r.id)
-		if i.exists():
-			invoiced.append(r)
-			res_inv.append(ReservationInvoice(r, i[0])) # More elegant solutions?
-		else:
-			not_invoiced.append(r)
+    res_inv = []
+    
+    for r in reservations:
+        i = invoices.filter(reservation_id = r.id)
+        if i.exists():
+            res_inv.append(ReservationInvoice(r, i[0])) # More elegant solutions?
+        else:
+            res_inv.append(ReservationInvoice(r, None))
 
-	args = {}
-	args['reservations'] = reservations
-	args['invoiced'] = invoiced
-	args['not_invoiced'] = not_invoiced
-	args['res_inv'] = res_inv
-	return render(request, 'list.html', args)
+    args = {}
+    args['res_inv'] = res_inv
+    return render(request, 'list.html', args)
 
 
 def create(request):
@@ -44,9 +38,10 @@ def create(request):
         form = ReservationCustomerForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect(request.session['http_referer'])
     else:
         form = ReservationCustomerForm()
+        request.session['http_referer'] = request.META.get('HTTP_REFERER', '/')
 
     args = {}
     args.update(csrf(request))
@@ -66,6 +61,7 @@ def edit(request, reservationId):
             editResult = "Changes saved"
     else:
         form = ReservationForm(instance=oldReservation)
+        request.session['http_referer'] = request.META.get('HTTP_REFERER', '/')
 
     args = {}
     args.update(csrf(request))
@@ -78,7 +74,7 @@ def edit(request, reservationId):
 def delete(request, reservationId):
     # Assuming that delete confirmation will be displayed by the calling page
     reservation = get_object_or_404(Reservation, id=reservationId).delete()
-    return redirect('/')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def hello(request, id = None): # For URL testing
