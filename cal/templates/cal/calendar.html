@@ -11,7 +11,7 @@
 <p class="lead"></p>
 <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:-7  %}">&lt;&lt; Prev</a>
 <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:7  %}">Next &gt;&gt;</a>
-<form>
+<form method="get" action="{% url 'reservations.views.create' %}">
   <table id="calendar">
     <tr>
       <th></th>

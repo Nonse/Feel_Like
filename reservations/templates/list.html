@@ -33,7 +33,7 @@
                     <strong>Invoice {{ r.invoice.id }} dated {{ r.invoice.date }}</strong>
                 {% else %}
                     <a href="{% url 'reservations.views.edit' r.reservation.id %}">Edit</a> |
-                    <a href="{% url 'reservations.views.delete' r.reservation.id %}">Delete</a>
+                    <a href="{% url 'reservations.views.delete' r.reservation.id %}" onclick="return (confirm('Really delete?'))">Delete</a>
                 {% endif %}
             </li>
 	    {% endfor %}

@@ -3,6 +3,7 @@ from reservations.models import *
 from reservations.forms import *
 from django.http import HttpResponse
 from django.core.context_processors import csrf
+from dateutil import parser
 
 # Tutorial: https://www.youtube.com/watch?v=gQe_8Q4YUpg
 # Another one with a slightly different approach: http://www.peachybits.com/2011/09/django-1-3-form-api-modelform-example/
@@ -24,7 +25,7 @@ def list(request):
     for r in reservations:
         i = invoices.filter(reservation_id = r.id)
         if i.exists():
-            res_inv.append(ReservationInvoice(r, i[0])) # More elegant solutions?
+            res_inv.append(ReservationInvoice(r, i[0]))
         else:
             res_inv.append(ReservationInvoice(r, None))
 
@@ -40,7 +41,19 @@ def create(request):
             form.save()
             return redirect(request.session['http_referer'])
     else:
-        form = ReservationCustomerForm()
+        startTime, endTime = None, None
+        
+        startRequest = request.GET.get('startTime')
+        endRequest = request.GET.get('endTime')
+
+        # Requires python-dateutil!
+        if (startRequest):
+            startTime = parser.parse(startRequest)
+        if (endRequest):
+            endTime = parser.parse(endRequest)
+
+        form = ReservationCustomerForm(initial = {'start_time': startTime, 'end_time': endTime})
+
         request.session['http_referer'] = request.META.get('HTTP_REFERER', '/')
 
     args = {}
