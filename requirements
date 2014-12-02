@@ -2,3 +2,4 @@ Django==1.7
 pytz
 django_extensions
 django-bootstrap-form
+python-dateutil
