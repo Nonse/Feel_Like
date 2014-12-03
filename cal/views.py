@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from datetime import * #specify later
-from reservations.models import Reservation 
-
-
-    
+from reservations.models import Reservation, Coach
+     
 def calendar(request, mondayParam = None):
     
     #first calendar to load starts on Monday of current week
@@ -26,7 +24,12 @@ def calendar(request, mondayParam = None):
         hours.append(t)
     
     #query for reservations .select_related gets connects coach and customer tables
-    reservations = Reservation.objects.all().select_related('coach__last_name' 'coach__first_name' 'customer__last_name' 'customer__first_name')
+    coaches = Coach.objects.all()
+    reservations = Reservation.objects.all().select_related(
+    'coach__last_name' 
+    'coach__first_name' 
+    'customer__last_name' 
+    'customer__first_name')
     startTimes = []
     for x in reservations:
         startTimes.append(x.start_time)
@@ -36,6 +39,15 @@ def calendar(request, mondayParam = None):
         reservationLength = timeDifference.seconds / 1800
         setattr(y, "reservationLength", reservationLength)
   
-    context = {'weekdates': weekdates, 'hours': hours, 'reservations': reservations, 'startTimes': startTimes, 'today': today}
-    
-    return render(request, 'cal/calendar.html', context)
+    #Shunt everything off to the calendar
+    context = {
+    'weekdates': weekdates, 
+    'hours': hours, 
+    'reservations': reservations, 
+    'startTimes': startTimes, 
+    'coaches': coaches,
+    'today': today}
+    if request.user.is_authenticated():
+        return render(request, 'cal/calendar.html', context)
+    else:
+        return render(request, 'cal/calendarUnauthenticated.html', context)
