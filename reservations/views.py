@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.core.context_processors import csrf
 from dateutil import parser
 from django.contrib.auth.decorators import login_required 
+from cal.views import timeIncrement
 
 # Tutorial: https://www.youtube.com/watch?v=gQe_8Q4YUpg
 # Another one with a slightly different approach: http://www.peachybits.com/2011/09/django-1-3-form-api-modelform-example/
@@ -52,6 +53,7 @@ def create(request):
             startTime = parser.parse(startRequest)
         if (endRequest):
             endTime = parser.parse(endRequest)
+            endTime += timeIncrement # duration of one slot in the calendar
 
         form = ReservationCustomerForm(initial = {'start_time': startTime, 'end_time': endTime})
 

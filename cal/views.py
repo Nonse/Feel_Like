@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from datetime import * #specify later
 from reservations.models import Reservation, Coach
+
+#duration of one slot in the calendar, also used to create reservations
+timeIncrement = timedelta(minutes=30)
      
 def calendar(request, mondayParam = None):
     
@@ -20,7 +23,7 @@ def calendar(request, mondayParam = None):
     d = date(1,1,1)    
     
     for y in range(0,31):
-        t = (datetime.combine(d,t) + timedelta(minutes=30)).time()
+        t = (datetime.combine(d,t) + timeIncrement).time()
         hours.append(t)
     
     #query for reservations .select_related gets connects coach and customer tables
