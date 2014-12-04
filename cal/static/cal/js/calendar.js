@@ -44,9 +44,7 @@ $(document).ready(function() {
 
     $(document)
     .mouseup(function () {
-        isMouseDown = false;
-        $("input[name*='startTime']").val(startTime);
-        $("input[name*='endTime']").val(endTime);
+      isMouseDown = false;
     });
     });
     
