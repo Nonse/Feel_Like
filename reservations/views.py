@@ -4,6 +4,7 @@ from reservations.forms import *
 from django.http import HttpResponse
 from django.core.context_processors import csrf
 from dateutil import parser
+from django.contrib.auth.decorators import login_required 
 
 # Tutorial: https://www.youtube.com/watch?v=gQe_8Q4YUpg
 # Another one with a slightly different approach: http://www.peachybits.com/2011/09/django-1-3-form-api-modelform-example/
@@ -15,7 +16,7 @@ class ReservationInvoice:
         self.reservation = reservation
         self.invoice = invoice
 
-
+@login_required(login_url='/login/')  
 def list(request):
     reservations = Reservation.objects.all()
     invoices = Invoice.objects.all()
@@ -33,7 +34,7 @@ def list(request):
     args['res_inv'] = res_inv
     return render(request, 'list.html', args)
 
-
+@login_required(login_url='/login/')  
 def create(request):
     if request.POST:
         form = ReservationCustomerForm(request.POST)
@@ -62,7 +63,7 @@ def create(request):
 
     return render(request, 'create.html', args)
 
-
+@login_required(login_url='/login/')  
 def edit(request, reservationId):
     oldReservation = get_object_or_404(Reservation, id=reservationId)
     editResult = ''
@@ -83,7 +84,7 @@ def edit(request, reservationId):
 
     return render(request, 'edit.html', args)
 
-
+@login_required(login_url='/login/')  
 def delete(request, reservationId):
     # Assuming that delete confirmation will be displayed by the calling page
     reservation = get_object_or_404(Reservation, id=reservationId).delete()
@@ -93,14 +94,14 @@ def delete(request, reservationId):
 def hello(request, id = None): # For URL testing
     return HttpResponse("Hello, world.")
 
-
+@login_required(login_url='/login/')  
 def customer_list(request):
     customers = Customer.objects.all()
     return render(request, 'customer_list.html', {
         'customers': customers
     })
 
-
+@login_required(login_url='/login/')  
 def customer_delete(request, id):
     customer = get_object_or_404(Customer, id=id)
     customer.delete()
@@ -109,6 +110,7 @@ def customer_delete(request, id):
 
 # HOW TO DO POST & GET
 # https://docs.djangoproject.com/en/dev/topics/forms/#the-view
+@login_required(login_url='/login/')  
 def customer_edit(request, id):
     customer = get_object_or_404(Customer, id=id)
 

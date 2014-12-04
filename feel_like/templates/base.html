@@ -19,17 +19,26 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
+  
 </head>
 <body>
   <div class="container">
     <div class="header">
       <ul class="nav nav-pills pull-right">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="{% url 'cal.views.calendar' %}">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
+        {% if user.is_authenticated %}
         <li><a href="{% url 'customer_list' %}">Customers</a></li>
+        {% endif %}
       </ul>
       <h3 class="text-muted">Feel Like</h3>
+      {% if user.is_authenticated %}
+      <a href="{% url 'feel_like.views.logout' %}">logout</a>
+      {% else %}
+      <a href="{% url 'feel_like.views.login' %}">login</a>
+      {% endif %}
     </div>
     <div class="jumbotron">
     {% block content %}
