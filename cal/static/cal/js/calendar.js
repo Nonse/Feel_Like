@@ -1,5 +1,19 @@
 $(document).ready(function() {
     
+    
+    //deletes rows that get shifted by reservation rowspan
+      $(".reserved").each(function(){
+    
+  var col = $(this).parent().children().index($(this));
+  var row = $(this).parent().parent().children().index($(this).parent()) + 1;
+   var spanRange = $(this).attr('rowspan') -1;    
+
+    for(i=0; i < spanRange; i++){
+        $( ".reserved").parent().parent().children().eq(row).children().get(col).remove();
+        row +=1;
+    }
+     });
+    
     var startTime;
     var endTime;
     
@@ -31,12 +45,14 @@ $(document).ready(function() {
     }).mouseover(function () {
     if($(this).hasClass("reserved")){
         isMouseDown = false;
-      }
-      else if (isMouseDown && $(this).attr('headers') == daySelected  && !$(this).hasClass("highlighted")) {
+    }
+    else if (isMouseDown && $(this).attr('headers') == daySelected  && !$(this).hasClass("highlighted")) {
         $(this).toggleClass("highlighted", isHighlighted);
         endTime = $(this).attr('id');
-      }
-      
+    }
+    else if (isMouseDown && $(this).attr('headers') != daySelected ){
+        $(".highlighted").removeClass("highlighted");
+     } 
     })
     .bind("selectstart", function () {
       return false;
@@ -47,6 +63,8 @@ $(document).ready(function() {
       isMouseDown = false;
     });
     });
+    
+    
     
     
     
