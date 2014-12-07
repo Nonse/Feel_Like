@@ -31,6 +31,11 @@
         <li><a href="#">Contact</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'customer_list' %}">Customers</a></li>
+	<li><a href="#">Reservations</a></li>
+	<li><a href="#">Products</a></li>	
+	<li><a href="#">Company Info</a></li>
+	<li><a href="{% url 'coach_list' %}">Coaches</a></li>
+	<li><a href="#">Invoices</a></li>
         {% endif %}
       </ul>
       <h3 class="text-muted">Feel Like</h3>
