@@ -19,4 +19,7 @@ urlpatterns = patterns('',
         name='coach_edit'),
     url(r'^coach/(?P<id>\d+)/delete/$', views.coach_delete,
         name='coach_delete'),
+    url(r'^company/$', views.company_edit,
+        name='company_edit'),
+
 )

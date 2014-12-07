@@ -87,3 +87,22 @@ COACH_FIELDS = (
     'phone'
     
 )
+
+
+class CompanyForm(forms.ModelForm):
+    class Meta:
+        model = Company
+
+
+COMPANY_FIELDS = (
+    'name',
+    'street_address',
+    'postcode',
+    'city',
+    'contact_person',
+    'phone',
+    'business_id',
+    'iban',
+    'location_vat'
+    
+)

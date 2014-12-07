@@ -165,3 +165,16 @@ def coach_edit(request, id):
         'form': form
         })
 
+@login_required(login_url='/login/')  
+def company_edit(request):
+    company = get_object_or_404(Company, id=1)
+
+    if request.method == 'POST':
+        form = CompanyForm(request.POST, instance=company)
+    else:
+        form = CompanyForm(instance=company)
+
+    return render(request, 'company_edit.html', {
+        'company': company,
+        'form': form
+        })
