@@ -6,36 +6,27 @@ from django.core.context_processors import csrf
 from dateutil import parser
 from django.contrib.auth.decorators import login_required 
 from cal.views import timeIncrement
+from datetime import date
+from .utils import *
 
 # Tutorial: https://www.youtube.com/watch?v=gQe_8Q4YUpg
 # Another one with a slightly different approach: http://www.peachybits.com/2011/09/django-1-3-form-api-modelform-example/
 
 # Redirect to home page instead of 404 if reservation not found?
 
-class ReservationInvoice:
-    def __init__(self, reservation, invoice):
-        self.reservation = reservation
-        self.invoice = invoice
-
-@login_required(login_url='/login/')  
+@login_required()  
 def list(request):
-    reservations = Reservation.objects.all()
-    invoices = Invoice.objects.all()
+    reservations_all = Reservation.objects.all()
+    reservations_invoiced = Reservation.objects.filter(invoice__isnull=False)
+    reservations_not_invoiced = Reservation.objects.filter(invoice__isnull=True)
 
-    res_inv = []
-    
-    for r in reservations:
-        i = invoices.filter(reservation_id = r.id)
-        if i.exists():
-            res_inv.append(ReservationInvoice(r, i[0]))
-        else:
-            res_inv.append(ReservationInvoice(r, None))
+    return render(request, 'list.html', {
+        'all': reservations_all,
+        'invoiced': reservations_invoiced,
+        'not_invoiced': reservations_not_invoiced
+    })
 
-    args = {}
-    args['res_inv'] = res_inv
-    return render(request, 'list.html', args)
-
-@login_required(login_url='/login/')  
+@login_required()  
 def create(request):
     if request.POST:
         form = ReservationCustomerForm(request.POST)
@@ -65,7 +56,7 @@ def create(request):
 
     return render(request, 'create.html', args)
 
-@login_required(login_url='/login/')  
+@login_required()  
 def edit(request, reservationId):
     oldReservation = get_object_or_404(Reservation, id=reservationId)
     editResult = ''
@@ -86,24 +77,21 @@ def edit(request, reservationId):
 
     return render(request, 'edit.html', args)
 
-@login_required(login_url='/login/')  
+@login_required()  
 def delete(request, reservationId):
     # Assuming that delete confirmation will be displayed by the calling page
     reservation = get_object_or_404(Reservation, id=reservationId).delete()
     return redirect(request.META.get('HTTP_REFERER'))
 
 
-def hello(request, id = None): # For URL testing
-    return HttpResponse("Hello, world.")
-
-@login_required(login_url='/login/')  
+@login_required()  
 def customer_list(request):
     customers = Customer.objects.all()
     return render(request, 'customer_list.html', {
         'customers': customers
     })
 
-@login_required(login_url='/login/')  
+@login_required()  
 def customer_delete(request, id):
     customer = get_object_or_404(Customer, id=id)
     customer.delete()
@@ -112,7 +100,7 @@ def customer_delete(request, id):
 
 # HOW TO DO POST & GET
 # https://docs.djangoproject.com/en/dev/topics/forms/#the-view
-@login_required(login_url='/login/')  
+@login_required()  
 def customer_edit(request, id):
     customer = get_object_or_404(Customer, id=id)
 
@@ -132,21 +120,21 @@ def customer_edit(request, id):
         })
 
 
-@login_required(login_url='/login/')  
+@login_required()  
 def coach_list(request):
     coaches = Coach.objects.all()
     return render(request, 'coach_list.html', {
         'coaches': coaches
     })
 
-@login_required(login_url='/login/')  
+@login_required()  
 def coach_delete(request, id):
     coach = get_object_or_404(Coach, id=id)
     coach.delete()
     return redirect('coach_list')
 
 
-@login_required(login_url='/login/')  
+@login_required()  
 def coach_edit(request, id):
     coach = get_object_or_404(Coach, id=id)
 
@@ -165,7 +153,7 @@ def coach_edit(request, id):
         'form': form
         })
 
-@login_required(login_url='/login/')  
+@login_required()  
 def company_edit(request):
     company = get_object_or_404(Company, id=1)
 
@@ -178,3 +166,35 @@ def company_edit(request):
         'company': company,
         'form': form
         })
+
+
+@login_required()
+def invoice_create(request):
+    if request.method == 'POST':
+        form = InvoiceForm(request.POST)
+        if form.is_valid():
+            invoice = form.save(commit=False) #to get object from form
+            invoice.company = Company.objects.all()[0] #adding company info
+            invoice.save() #saving modified invoice
+            for r in form.cleaned_data['reservations']:#add invoice to r
+                r.invoice = invoice
+                r.save()
+            return redirect('r_list')
+    else:
+        last_invoice = Invoice.objects.order_by('-id')[0:1]#1st element + cast to list
+        if last_invoice:
+            next_id = last_invoice[0].id + 1
+        else:
+            next_id = 1
+
+        initial = {
+            'date': date.today(),
+            'customer': request.GET['customer'],
+            'reservations': request.GET.getlist('reservations', []),
+            'ref_number': make_referencenumber(str(next_id + 1000))
+        }
+        form = InvoiceForm(initial=initial)
+    return render(request, 'invoice_create.html', {
+        'form': form
+    })
+

@@ -4,10 +4,10 @@ import re
 from reservations import views
 
 urlpatterns = patterns('',
-	url(r'^list/?$', views.list),
-    url(r'^create/?$', views.create),
-    url(r'^edit/(?P<reservationId>\d+)/$', views.edit),
-    url(r'^delete/(?P<reservationId>\d+)/$', views.delete),
+	url(r'^list/?$', views.list, name='r_list'),
+    url(r'^create/?$', views.create, name='r_create'),
+    url(r'^edit/(?P<reservationId>\d+)/$', views.edit, name='r_edit'),
+    url(r'^delete/(?P<reservationId>\d+)/$', views.delete, name='r_delete'),
     url(r'^customer/(?P<id>\d+)/delete/$', views.customer_delete,
         name='customer_delete'),
     url(r'^customer/(?P<id>\d+)/$', views.customer_edit,
@@ -21,5 +21,6 @@ urlpatterns = patterns('',
         name='coach_delete'),
     url(r'^company/$', views.company_edit,
         name='company_edit'),
+    url(r'^invoice/create/$', views.invoice_create, name='invoice_create'),
 
 )

@@ -106,3 +106,36 @@ COMPANY_FIELDS = (
     'location_vat'
     
 )
+
+
+class InvoiceForm(forms.ModelForm):
+    reservations = forms.ModelMultipleChoiceField(
+        queryset=Reservation.objects.filter(invoice__isnull=True)
+    )
+
+    class Meta:
+        model = Invoice
+        fields = (
+            'date',
+            'customer',
+            'due_date',
+            'reservations',
+            'ref_number',
+            'total'
+        )
+        widgets = {
+            'ref_number': forms.TextInput(attrs={'readonly': True})
+        }
+
+    def __init__(self, data=None, *args, **kwargs):
+        super(InvoiceForm, self).__init__(
+            data=data, *args, **kwargs
+        )
+
+        if data and data.get('customer'):
+            self.fields['reservations'].queryset = (
+                self.fields['reservations'].queryset.filter(
+                    customer_id=data.get('customer')
+                )
+            )
+

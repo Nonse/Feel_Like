@@ -1,253 +1,343 @@
 [
 {
-  "fields": {
-    "participants": 1,
-    "amount": "149.99",
-    "start_time": "2014-10-16T10:00:00Z",
-    "location_price": "49.99",
-    "end_time": "2014-10-16T12:00:00Z",
-    "coach": 1,
-    "location": "Some sports hall",
-    "customer": 1,
-    "product": 1
-  },
-  "pk": 1,
-  "model": "reservations.reservation"
+    "fields": {
+        "customer": 1,
+        "product": 1,
+        "coach": 1,
+        "start_time": "2014-10-16T10:00:00Z",
+        "amount": "149.99",
+        "participants": 1,
+        "end_time": "2014-10-16T12:00:00Z",
+        "invoice": 1,
+        "location_price": "49.99",
+        "location": "Some sports hall"
+    },
+    "model": "reservations.reservation",
+    "pk": 1
 },
 {
-  "fields": {
-    "participants": 1,
-    "amount": "149.99",
-    "start_time": "2014-10-16T12:00:00Z",
-    "location_price": "49.99",
-    "end_time": "2014-10-16T14:00:00Z",
-    "coach": 1,
-    "location": "Some sports hall",
-    "customer": 3,
-    "product": 1
-  },
-  "pk": 2,
-  "model": "reservations.reservation"
+    "fields": {
+        "customer": 3,
+        "product": 1,
+        "coach": 1,
+        "start_time": "2014-10-16T12:00:00Z",
+        "amount": "149.99",
+        "participants": 1,
+        "end_time": "2014-10-16T14:00:00Z",
+        "invoice": 2,
+        "location_price": "49.99",
+        "location": "Some sports hall"
+    },
+    "model": "reservations.reservation",
+    "pk": 2
 },
 {
-  "fields": {
-    "participants": 1,
-    "amount": "149.99",
-    "start_time": "2014-10-17T14:00:00Z",
-    "location_price": "49.99",
-    "end_time": "2014-10-17T16:00:00Z",
-    "coach": 2,
-    "location": "Some sports hall",
-    "customer": 1,
-    "product": 1
-  },
-  "pk": 3,
-  "model": "reservations.reservation"
+    "fields": {
+        "customer": 1,
+        "product": 1,
+        "coach": 2,
+        "start_time": "2014-10-17T14:00:00Z",
+        "amount": "149.99",
+        "participants": 1,
+        "end_time": "2014-10-17T16:00:00Z",
+        "invoice": 4,
+        "location_price": "49.99",
+        "location": "Some sports hall"
+    },
+    "model": "reservations.reservation",
+    "pk": 3
 },
 {
-  "fields": {
-    "participants": 4,
-    "amount": "249.99",
-    "start_time": "2014-10-17T16:00:00Z",
-    "location_price": "49.99",
-    "end_time": "2014-10-17T18:00:00Z",
-    "coach": 1,
-    "location": "Some sports hall",
-    "customer": 2,
-    "product": 2
-  },
-  "pk": 4,
-  "model": "reservations.reservation"
+    "fields": {
+        "customer": 2,
+        "product": 2,
+        "coach": 1,
+        "start_time": "2014-10-17T16:00:00Z",
+        "amount": "249.99",
+        "participants": 4,
+        "end_time": "2014-10-17T18:00:00Z",
+        "invoice": 4,
+        "location_price": "49.99",
+        "location": "Some sports hall"
+    },
+    "model": "reservations.reservation",
+    "pk": 4
 },
 {
-  "fields": {
-    "participants": 1,
-    "amount": "149.99",
-    "start_time": "2014-10-18T10:00:00Z",
-    "location_price": "49.99",
-    "end_time": "2014-10-18T12:00:00Z",
-    "coach": 2,
-    "location": "Some sports hall",
-    "customer": 1,
-    "product": 1
-  },
-  "pk": 5,
-  "model": "reservations.reservation"
+    "fields": {
+        "customer": 1,
+        "product": 1,
+        "coach": 2,
+        "start_time": "2014-10-18T10:00:00Z",
+        "amount": "149.99",
+        "participants": 1,
+        "end_time": "2014-10-18T12:00:00Z",
+        "invoice": 1,
+        "location_price": "49.99",
+        "location": "Some sports hall"
+    },
+    "model": "reservations.reservation",
+    "pk": 5
 },
 {
-  "fields": {
-    "participants": 1,
-    "amount": "149.99",
-    "start_time": "2014-10-18T14:00:00Z",
-    "location_price": "49.99",
-    "end_time": "2014-10-18T16:00:00Z",
-    "coach": 1,
-    "location": "Some sports hall",
-    "customer": 4,
-    "product": 1
-  },
-  "pk": 6,
-  "model": "reservations.reservation"
+    "fields": {
+        "customer": 4,
+        "product": 1,
+        "coach": 1,
+        "start_time": "2014-10-18T14:00:00Z",
+        "amount": "149.99",
+        "participants": 1,
+        "end_time": "2014-10-18T16:00:00Z",
+        "invoice": 2,
+        "location_price": "49.99",
+        "location": "Some sports hall"
+    },
+    "model": "reservations.reservation",
+    "pk": 6
 },
 {
-  "fields": {
-    "last_name": "Doe",
-    "postcode": "01370",
-    "first_name": "John",
-    "phone": "+123456789",
-    "discount": "0",
-    "street_address": "Somestreet 123",
-    "email": "john.doe@email.com",
-    "city": "Vantaa"
-  },
-  "pk": 1,
-  "model": "reservations.customer"
+    "fields": {
+        "customer": 1,
+        "product": 1,
+        "coach": 1,
+        "start_time": "2014-12-08T22:00:00Z",
+        "amount": "1",
+        "participants": 1,
+        "end_time": "2014-12-08T23:00:00Z",
+        "invoice": null,
+        "location_price": "1",
+        "location": "rfg"
+    },
+    "model": "reservations.reservation",
+    "pk": 13
 },
 {
-  "fields": {
-    "last_name": "Doe",
-    "postcode": "01370",
-    "first_name": "Jane",
-    "phone": "+123456788",
-    "discount": "0",
-    "street_address": "Somestreet 123",
-    "email": "jane.doe@email.com",
-    "city": "Vantaa"
-  },
-  "pk": 2,
-  "model": "reservations.customer"
+    "fields": {
+        "customer": 1,
+        "product": 1,
+        "coach": 1,
+        "start_time": "2014-11-28T14:30:00Z",
+        "amount": "1",
+        "participants": 1,
+        "end_time": "2014-11-28T15:00:00Z",
+        "invoice": null,
+        "location_price": "1",
+        "location": "as"
+    },
+    "model": "reservations.reservation",
+    "pk": 14
 },
 {
-  "fields": {
-    "last_name": "Smith",
-    "postcode": "01371",
-    "first_name": "John",
-    "phone": "+9876543321",
-    "discount": "0",
-    "street_address": "Otherstreet 456",
-    "email": "john.smith@email.com",
-    "city": "Elsewhere"
-  },
-  "pk": 3,
-  "model": "reservations.customer"
+    "fields": {
+        "customer": 1,
+        "product": 1,
+        "coach": 1,
+        "start_time": "2014-12-05T20:00:00Z",
+        "amount": "23",
+        "participants": 1,
+        "end_time": "2014-12-05T21:00:00Z",
+        "invoice": null,
+        "location_price": "1",
+        "location": "rewq"
+    },
+    "model": "reservations.reservation",
+    "pk": 15
 },
 {
-  "fields": {
-    "last_name": "Smith",
-    "postcode": "01371",
-    "first_name": "Jane",
-    "phone": "+9876543322",
-    "discount": "0",
-    "street_address": "Otherstreet 456",
-    "email": "jane.smith@email.com",
-    "city": "Elsewhere"
-  },
-  "pk": 4,
-  "model": "reservations.customer"
+    "fields": {
+        "customer": 1,
+        "product": 1,
+        "coach": 1,
+        "start_time": "2014-12-06T20:00:00Z",
+        "amount": "2",
+        "participants": 2,
+        "end_time": "2014-12-06T20:00:00Z",
+        "invoice": null,
+        "location_price": "2",
+        "location": "2"
+    },
+    "model": "reservations.reservation",
+    "pk": 16
 },
 {
-  "fields": {
-    "last_name": "Vikman",
-    "first_name": "Mikko",
-    "phone": "046 568 7281"
-  },
-  "pk": 1,
-  "model": "reservations.coach"
+    "fields": {
+        "city": "Vantaa",
+        "first_name": "John",
+        "last_name": "Doe",
+        "discount": "0",
+        "phone": "+123456789",
+        "postcode": "01370",
+        "email": "john.doe@email.com",
+        "street_address": "Somestreet 123"
+    },
+    "model": "reservations.customer",
+    "pk": 1
 },
 {
-  "fields": {
-    "last_name": "Sjolund",
-    "first_name": "Emma",
-    "phone": "046 568 7281"
-  },
-  "pk": 2,
-  "model": "reservations.coach"
+    "fields": {
+        "city": "Vantaa",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "discount": "0",
+        "phone": "+123456788",
+        "postcode": "01370",
+        "email": "jane.doe@email.com",
+        "street_address": "Somestreet 123"
+    },
+    "model": "reservations.customer",
+    "pk": 2
 },
 {
-  "fields": {
-    "name": "Personal training",
-    "vat": "23",
-    "price": "99.99"
-  },
-  "pk": 1,
-  "model": "reservations.product"
+    "fields": {
+        "city": "Elsewhere",
+        "first_name": "John",
+        "last_name": "Smith",
+        "discount": "0",
+        "phone": "+9876543321",
+        "postcode": "01371",
+        "email": "john.smith@email.com",
+        "street_address": "Otherstreet 456"
+    },
+    "model": "reservations.customer",
+    "pk": 3
 },
 {
-  "fields": {
-    "name": "Group training",
-    "vat": "23",
-    "price": "199.99"
-  },
-  "pk": 2,
-  "model": "reservations.product"
+    "fields": {
+        "city": "Elsewhere",
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "discount": "0",
+        "phone": "+9876543322",
+        "postcode": "01371",
+        "email": "jane.smith@email.com",
+        "street_address": "Otherstreet 456"
+    },
+    "model": "reservations.customer",
+    "pk": 4
 },
 {
-  "fields": {
-    "reservation": 1,
-    "date": "2014-10-16",
-    "company": 1
-  },
-  "pk": 1,
-  "model": "reservations.invoice"
+    "fields": {
+        "city": "ddf",
+        "first_name": "qwer",
+        "last_name": "qwe",
+        "discount": "1",
+        "phone": "12345",
+        "postcode": "01371",
+        "email": "qwe@ds.ru",
+        "street_address": "df"
+    },
+    "model": "reservations.customer",
+    "pk": 8
 },
 {
-  "fields": {
-    "reservation": 2,
-    "date": "2014-10-16",
-    "company": 1
-  },
-  "pk": 2,
-  "model": "reservations.invoice"
+    "fields": {
+        "phone": "046 568 7281",
+        "first_name": "Mikko",
+        "last_name": "Vikman"
+    },
+    "model": "reservations.coach",
+    "pk": 1
 },
 {
-  "fields": {
-    "reservation": 3,
-    "date": "2014-10-17",
-    "company": 1
-  },
-  "pk": 3,
-  "model": "reservations.invoice"
+    "fields": {
+        "phone": "046 568 7281",
+        "first_name": "Emma",
+        "last_name": "Sjolund"
+    },
+    "model": "reservations.coach",
+    "pk": 2
 },
 {
-  "fields": {
-    "reservation": 4,
-    "date": "2014-10-17",
-    "company": 1
-  },
-  "pk": 4,
-  "model": "reservations.invoice"
+    "fields": {
+        "price": "99.99",
+        "name": "Personal training",
+        "vat": "23"
+    },
+    "model": "reservations.product",
+    "pk": 1
 },
 {
-  "fields": {
-    "reservation": 5,
-    "date": "2014-10-18",
-    "company": 1
-  },
-  "pk": 5,
-  "model": "reservations.invoice"
+    "fields": {
+        "price": "199.99",
+        "name": "Group training",
+        "vat": "23"
+    },
+    "model": "reservations.product",
+    "pk": 2
 },
 {
-  "fields": {
-    "reservation": 6,
-    "date": "2014-10-18",
-    "company": 1
-  },
-  "pk": 6,
-  "model": "reservations.invoice"
+    "fields": {
+        "date": "2014-10-16",
+        "customer": 2,
+        "company": 1,
+        "total": "0"
+    },
+    "model": "reservations.invoice",
+    "pk": 1
 },
 {
-  "fields": {
-    "postcode": "01260",
-    "business_id": "2622082-9",
-    "phone": "046 568 7281",
-    "street_address": "Loimitie 11 A 1",
-    "iban": "FI23 8146 9710 0802 26",
-    "contact_person": "Mikko Vikman",
-    "name": "Feel Like Oy",
-    "city": "Vantaa",
-    "location_vat": "10"
-  },
-  "pk": 1,
-  "model": "reservations.company"
+    "fields": {
+        "date": "2014-10-16",
+        "customer": 1,
+        "company": 1,
+        "total": "0"
+    },
+    "model": "reservations.invoice",
+    "pk": 2
+},
+{
+    "fields": {
+        "date": "2014-10-17",
+        "customer": 4,
+        "company": 1,
+        "total": "0"
+    },
+    "model": "reservations.invoice",
+    "pk": 3
+},
+{
+    "fields": {
+        "date": "2014-10-17",
+        "customer": 3,
+        "company": 1,
+        "total": "0"
+    },
+    "model": "reservations.invoice",
+    "pk": 4
+},
+{
+    "fields": {
+        "date": "2014-10-18",
+        "customer": 2,
+        "company": 1,
+        "total": "0"
+    },
+    "model": "reservations.invoice",
+    "pk": 5
+},
+{
+    "fields": {
+        "date": "2014-10-18",
+        "customer": 1,
+        "company": 1,
+        "total": "0"
+    },
+    "model": "reservations.invoice",
+    "pk": 6
+},
+{
+    "fields": {
+        "city": "Vantaa",
+        "name": "Feel Like Oy",
+        "business_id": "2622082-9",
+        "phone": "046 568 7281",
+        "iban": "FI23 8146 9710 0802 26",
+        "postcode": "01260",
+        "location_vat": "10",
+        "contact_person": "Mikko Vikman",
+        "street_address": "Loimitie 11 A 1"
+    },
+    "model": "reservations.company",
+    "pk": 1
 }
 ]

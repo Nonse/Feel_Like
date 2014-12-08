@@ -9,19 +9,19 @@
     <h2>All</h2>
 
     <ul>
-	    {% for r in res_inv %}
+	    {% for r in all %}
 		    <li class="text-left">
-                {{ r.reservation.start_time }} to {{ r.reservation.end_time }}<br>
-                Customer: {{ r.reservation.customer }}<br>
-                Coach: {{ r.reservation.coach }}<br>
-                Product: {{ r.reservation.product }}<br>
-                Location: {{ r.reservation.location }}<br>
-                Participants: {{ r.reservation.participants }}<br>
+                {{ r.start_time }} to {{ r.end_time }}<br>
+                Customer: {{ r.customer }}<br>
+                Coach: {{ r.coach }}<br>
+                Product: {{ r.product }}<br>
+                Location: {{ r.location }}<br>
+                Participants: {{ r.participants }}<br>
                 {% if r.invoice.id %}
                     <strong>Invoice {{ r.invoice.id }} dated {{ r.invoice.date }}</strong>
                 {% else %}
-                    <a href="{% url 'reservations.views.edit' r.reservation.id %}">Edit</a> |
-                    <a href="{% url 'reservations.views.delete' r.reservation.id %}" onclick="return (confirm('Really delete?'))">Delete</a>
+                    <a href="{% url 'reservations.views.edit' r.id %}">Edit</a> |
+                    <a href="{% url 'reservations.views.delete' r.id %}" onclick="return (confirm('Really delete?'))">Delete</a>
                 {% endif %}
             </li>
 	    {% endfor %}
@@ -32,18 +32,16 @@
     <h2>Invoiced</h2>
 
     <ul>
-	    {% for r in res_inv %}
-            {% if r.invoice.id %}
+	    {% for r in invoiced %}
 		        <li class="text-left">
-                    {{ r.reservation.start_time }} to {{ r.reservation.end_time }}<br>
-                    Customer: {{ r.reservation.customer }}<br>
-                    Coach: {{ r.reservation.coach }}<br>
-                    Product: {{ r.reservation.product }}<br>
-                    Location: {{ r.reservation.location }}<br>
-                    Participants: {{ r.reservation.participants }}<br>
+                    {{ r.start_time }} to {{ r.end_time }}<br>
+                    Customer: {{ r.customer }}<br>
+                    Coach: {{ r.coach }}<br>
+                    Product: {{ r.product }}<br>
+                    Location: {{ r.location }}<br>
+                    Participants: {{ r.participants }}<br>
                     <strong>Invoice {{ r.invoice.id }} dated {{ r.invoice.date }}</strong>
                 </li>
-            {% endif %}
 	    {% endfor %}
     </ul>
 </div>
@@ -52,25 +50,22 @@
     <h2>Not Invoiced</h2>
 
     <ul>
-	    {% for r in res_inv %}
-            {% if not r.invoice.id %}
+	    {% for r in not_invoiced %}
 		        <li class="text-left">
-                    {{ r.reservation.start_time }} to {{ r.reservation.end_time }}<br>
-                    Customer: {{ r.reservation.customer }}<br>
-                    Coach: {{ r.reservation.coach }}<br>
-                    Product: {{ r.reservation.product }}<br>
-                    Location: {{ r.reservation.location }}<br>
-                    Participants: {{ r.reservation.participants }}<br>
-                    <a href="{% url 'reservations.views.edit' r.reservation.id %}">Edit</a> |
-                    <a href="{% url 'reservations.views.delete' r.reservation.id %}" onclick="return (confirm('Really delete?'))">Delete</a>
+                    {{ r.start_time }} to {{ r.end_time }}<br>
+                    Customer: {{ r.customer }}<br>
+                    Coach: {{ r.coach }}<br>
+                    Product: {{ r.product }}<br>
+                    Location: {{ r.location }}<br>
+                    Participants: {{ r.participants }}<br>
+                    <a href="{% url 'reservations.views.edit' r.id %}">Edit</a> |
+                    <a href="{% url 'reservations.views.delete' r.id %}" onclick="return (confirm('Really delete?'))">Delete</a> |
+                    <a href="{% url 'invoice_create' %}?customer={{ r.customer.id }}&reservations={{ r.id }}">Create Invoice</a>
                 </li>
-            {% endif %}
 	    {% endfor %}
     </ul>
     </ul>
 </div>
-
-{{ content }}
 
 <script type="text/javascript">
     // Not very flexible, but will do.
