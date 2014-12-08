@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head><title>Edit Reservation</title></head>
-
-<body>
-
-<h1>Edit Reservation</h1>
-
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block content %}
 <form method="post">
 	{% csrf_token %}
 	<ul>
-		{{ form.as_ul }}
+		{{ form|bootstrap }}
 	</ul>
 	<input type="submit" name="submit" value="Save changes" />
 </form>
@@ -17,11 +12,4 @@
 <p id="edit_result">{{ editResult }}</p>
 
 <p><a href="{{ request.session.http_referer }}">Back</a></p>
-
-<!-- WTF does this do? -->
-{{ content }}
-
-<!-- Start and end time fields need date pickers attached -->
-
-</body>
-</html>
+{% endblock %}

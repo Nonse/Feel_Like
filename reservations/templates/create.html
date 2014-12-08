@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 {% load staticfiles %}
-{% block title %}
-Crate Reservation
-{% endblock %}
 {% block content %}
-<h2>Create Reservation</h2>
 
 <form method="post">
 	{% csrf_token %}
 	<ul>
-		{{ form.as_ul }}
+		{{ form|bootstrap }}
 	</ul>
 	<input type="submit" name="submit" value="Create reservation" />
 </form>

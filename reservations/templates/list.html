@@ -1,28 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head><title>List of Reservations</title></head>
-
-<body>
-
-<h1>List of Reservations</h1>
-
-<a href="{% url 'reservations.views.create' %}">New Reservation</a>
-
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block content %}
 <p>
-    <a href="#" class="toggle" onclick="showAll(); return false">All</a> | <a href="#" class="toggle" onclick="showInvoiced(); return false">Invoiced</a> | <a href="#" class="toggle" onclick="showNotInvoiced(); return false">Not Invoiced</a>
+    <a href="#" class="toggle" onclick="showAll(); return false">All</a> | <a href="#" class="toggle" onclick="showInvoiced(); return false">Invoiced</a> | <a href="#" class="toggle" onclick="showNotInvoiced(); return false">Not Invoiced</a> <!-- | <a href="{% url 'reservations.views.create' %}">New Reservation</a> -->
 </p>
-
-<div style="border: 1px solid red; display: inline-block">
-    This should be restyled somehow, like making the current selection bold or different color or unclickable.<br>
-    The JS delete confirmation also sucks, but I don't know if we have the time for a nicer one, like the last time.
-</div>
 
 <div id="all">
     <h2>All</h2>
 
     <ul>
 	    {% for r in res_inv %}
-		    <li>
+		    <li class="text-left">
                 {{ r.reservation.start_time }} to {{ r.reservation.end_time }}<br>
                 Customer: {{ r.reservation.customer }}<br>
                 Coach: {{ r.reservation.coach }}<br>
@@ -46,7 +34,7 @@
     <ul>
 	    {% for r in res_inv %}
             {% if r.invoice.id %}
-		        <li>
+		        <li class="text-left">
                     {{ r.reservation.start_time }} to {{ r.reservation.end_time }}<br>
                     Customer: {{ r.reservation.customer }}<br>
                     Coach: {{ r.reservation.coach }}<br>
@@ -66,7 +54,7 @@
     <ul>
 	    {% for r in res_inv %}
             {% if not r.invoice.id %}
-		        <li>
+		        <li class="text-left">
                     {{ r.reservation.start_time }} to {{ r.reservation.end_time }}<br>
                     Customer: {{ r.reservation.customer }}<br>
                     Coach: {{ r.reservation.coach }}<br>
@@ -107,6 +95,4 @@
 
     showAll();
 </script>
-
-</body>
-</html>
+{% endblock %}

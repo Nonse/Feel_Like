@@ -12,9 +12,9 @@ var CUSTOMERFIELDS = [
 function showHide () {
   var selectedCustomer = $('#id_customer').val();
   if (selectedCustomer === '') {
-    $(CUSTOMERFIELDS.join(', ')).parent().show();
+      $(CUSTOMERFIELDS.join(', ')).parent().parent().show();
   } else {
-    $(CUSTOMERFIELDS.join(', ')).parent().hide();
+      $(CUSTOMERFIELDS.join(', ')).parent().parent().hide();
   }
 }
 
