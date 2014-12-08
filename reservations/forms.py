@@ -74,3 +74,35 @@ class ReservationCustomerForm(forms.ModelForm):
                 self.data = self.data.dict()
                 self.data['customer'] = customer.id
         return super(ReservationCustomerForm, self).full_clean()
+
+
+class CoachForm(forms.ModelForm):
+    class Meta:
+        model = Coach
+
+
+COACH_FIELDS = (
+    'first_name',
+    'last_name',
+    'phone'
+    
+)
+
+
+class CompanyForm(forms.ModelForm):
+    class Meta:
+        model = Company
+
+
+COMPANY_FIELDS = (
+    'name',
+    'street_address',
+    'postcode',
+    'city',
+    'contact_person',
+    'phone',
+    'business_id',
+    'iban',
+    'location_vat'
+    
+)

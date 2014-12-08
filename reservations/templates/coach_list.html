@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<ul>
+	{% for coach in coaches %}
+	<li>{{ coach.last_name }}, {{ coach.first_name}}
+		<a href="{% url 'coach_edit' coach.id %}" class="btn btn-default">
+			<span class="glyphicon glyphicon-pencil"></span>
+		</a>
+		<a href="{% url 'coach_delete' coach.id %}" class="btn btn-default delete">
+			<span class="glyphicon glyphicon-trash"></span>
+		</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}
+

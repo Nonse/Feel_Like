@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>Calendar Booking</h1>
+
 <p class="lead"></p>
 <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:-7  %}">&lt;&lt; Prev</a>
 <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:7  %}">Next &gt;&gt;</a>

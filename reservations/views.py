@@ -131,3 +131,50 @@ def customer_edit(request, id):
         'form': form
         })
 
+
+@login_required(login_url='/login/')  
+def coach_list(request):
+    coaches = Coach.objects.all()
+    return render(request, 'coach_list.html', {
+        'coaches': coaches
+    })
+
+@login_required(login_url='/login/')  
+def coach_delete(request, id):
+    coach = get_object_or_404(Coach, id=id)
+    coach.delete()
+    return redirect('coach_list')
+
+
+@login_required(login_url='/login/')  
+def coach_edit(request, id):
+    coach = get_object_or_404(Coach, id=id)
+
+    if request.method == 'POST':
+        form = CoachForm(request.POST, instance=coach)
+
+        if form.is_valid():
+            form.save()
+            return redirect('coach_list')
+
+    else:
+        form = CoachForm(instance=coach)
+
+    return render(request, 'coach_edit.html', {
+        'coach': coach,
+        'form': form
+        })
+
+@login_required(login_url='/login/')  
+def company_edit(request):
+    company = get_object_or_404(Company, id=1)
+
+    if request.method == 'POST':
+        form = CompanyForm(request.POST, instance=company)
+    else:
+        form = CompanyForm(instance=company)
+
+    return render(request, 'company_edit.html', {
+        'company': company,
+        'form': form
+        })
