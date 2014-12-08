@@ -12,6 +12,9 @@ class Reservation(models.Model):
     participants = models.IntegerField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __unicode__(self):
+        return u'%s-%s' % (self.start_time.strftime('%Y-%m-%d, %H:%M'), self.end_time.strftime('%H:%M'))
+
 class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -46,6 +49,9 @@ class Invoice(models.Model):
     reservation = models.OneToOneField('Reservation')
     company = models.ForeignKey('Company')
 
+    def __unicode__(self):
+        return u'%s: %s' % (self.reservation.start_time.strftime('%Y-%m-%d, %H:%M'), self.reservation.customer)
+
 class Company(models.Model):
     name = models.CharField(max_length=100)
     street_address = models.CharField(max_length=200)
@@ -57,3 +63,5 @@ class Company(models.Model):
     iban = models.CharField(max_length=100, null=True, blank=True)
     location_vat = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __unicode__(self):
+        return u'%s' % (self.name)
