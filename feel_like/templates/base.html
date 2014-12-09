@@ -37,7 +37,7 @@
       	<li {% block menu-invoices %}{% endblock %}><a href="{% url 'invoice_list' %}">Invoices</a></li>
         <li><a href="{% url 'feel_like.views.logout' %}">Logout</a></li>
         <li><a href="{% url 'admin:index' %}" class="btn btn-default delete">
-      <span class="glyphicon glyphicon-wrench"></span></a></li>
+      <span class="glyphicon glyphicon-cog"></span></a></li>
         {% else %}
         <li><a href="{% url 'feel_like.views.login' %}">Login</a></li>
         {% endif %}
