@@ -22,5 +22,10 @@ urlpatterns = patterns('',
     url(r'^company/$', views.company_edit,
         name='company_edit'),
     url(r'^invoice/create/$', views.invoice_create, name='invoice_create'),
-
+    url(r'^invoice/calculate_total/$', views.calculate_total,
+        name='calculate_total'),
+    url(r'^invoice/invoice_list/$', views.invoice_list,
+        name='invoice_list'),
+    url(r'^invoice/(?P<id>\d+)/delete/$', views.invoice_delete,
+        name='invoice_delete'),
 )

@@ -18,3 +18,36 @@ function makeReferenceNumber(number) {
 
     return number + difference.toString();
 }
+
+// datepicker
+
+$('#id_date,#id_due_date').datepicker({
+    format: 'yyyy-mm-dd',
+    weekStart: 1,
+    todayHighlight: true,
+    autoclose: true
+});
+
+// multiple select, total count
+
+var updateTotal = function() {
+    var values = $('#id_reservations').val();
+    $.ajax({
+        url: '/reservation/invoice/calculate_total/',
+        type: 'GET',
+        data: {'reservations': values},
+        dataType: 'json'
+
+    }).done(function(result){
+        $('#id_total').val(result.total)
+    })
+};
+
+$('#id_reservations').multiselect({
+    numberDisplayed: 1,
+    buttonClass: 'btn btn-link',
+    includeSelectAllOption: true,
+    onChange: updateTotal
+});
+
+updateTotal();

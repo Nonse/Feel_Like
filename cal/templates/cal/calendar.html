@@ -5,7 +5,9 @@
 {% block javascript %}
 <script src="{% static "cal/js/calendar.js" %}"></script>
 {% endblock %}
-
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'cal/style.css' %}" />
+{% endblock %}
 {% block content %}
 
 <p class="lead"></p>

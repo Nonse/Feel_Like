@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from cal.views import timeIncrement
 from datetime import date
 from .utils import *
+import json
 
 # Tutorial: https://www.youtube.com/watch?v=gQe_8Q4YUpg
 # Another one with a slightly different approach: http://www.peachybits.com/2011/09/django-1-3-form-api-modelform-example/
@@ -198,3 +199,33 @@ def invoice_create(request):
         'form': form
     })
 
+ 
+@login_required()
+def calculate_total(request):
+    '''
+    total price includes both Location Price and Amount values.
+    ''' 
+    reservations = (
+        request.GET.getlist('reservations', []) or
+        request.GET.getlist('reservations[]', [])
+    )
+    total = 0
+    for r in reservations:
+        reservation = Reservation.objects.get(id=r)
+        total += reservation.location_price + reservation.amount
+    return HttpResponse(json.dumps({'total': str(total)}))
+
+
+@login_required()  
+def invoice_list(request):
+    invoices = Invoice.objects.all()
+    return render(request, 'invoice_list.html', {
+        'invoices': invoices
+    })
+
+
+@login_required()  
+def invoice_delete(request, id):
+    invoice = get_object_or_404(Invoice, id=id)
+    invoice.delete()
+    return redirect('invoice_list')

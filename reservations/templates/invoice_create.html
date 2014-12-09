@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
+{% load staticfiles %}
+{% block css %}
+<link rel="stylesheet" type="text/css"
+                        href="{% static 'datepicker/datepicker3.css' %}"
+/>
+<link rel="stylesheet" type="text/css"
+                        href="{% static 'multiselect/bootstrap-multiselect.css' %}"
+/>
+<link rel="stylesheet" type="text/css"
+                        href="{% static 'css/invoice-create.css' %}"
+/>
+{% endblock %}
 {% block content %}
 <form method="POST" action=".">
     {% csrf_token %}
     {{ form|bootstrap }}
     <input type="submit" value="Save" />
 </form>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript"
+        src="{% static 'datepicker/bootstrap-datepicker.js' %}">
+</script>
+<script type="text/javascript"
+        src="{% static 'bootstrap/js/bootstrap.js' %}">
+</script>
+<script type="text/javascript"
+        src="{% static 'multiselect/bootstrap-multiselect.js' %}">
+</script>
+<script type="text/javascript"
+        src="{% static 'js/invoice_create.js' %}">
+</script>
 {% endblock %}
