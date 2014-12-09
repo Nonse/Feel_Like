@@ -9,24 +9,27 @@
 <link rel="stylesheet" type="text/css" href="{% static 'cal/style.css' %}" />
 {% endblock %}
 {% block content %}
+{# header looks like crap, dudes.. #}
 <h1>Calendar Booking</h1>
 <p class="lead"></p>
-<a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:-7  %}">&lt;&lt; Prev</a>
-<a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:7  %}">Next &gt;&gt;</a>
+    <div class="coach-select">
+    <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:-7  %}">&lt;&lt; Prev</a>
     <select>
         {% for coach in coaches %}
             <option value="{{coach.pk}}">{{coach.first_name }} {{coach.last_name}}</option>    
         {% endfor %}
     </select>
+    <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:7  %}">Next &gt;&gt;</a>
+</div>
     
     
        
     
   <table id="calendarUnAuth">
     <tr>
-      <th></th>
+      <th class="cal-times"></th>
       {% for day in weekdates %}
-      <th id="{{day|date:"l"}}">{{day|date:"l j F"}}</th>
+      <th class="cal-days" id="{{day|date:"l"}}">{{day|date:"l"}}<br>{{day|date:"j F"}}</th>
       {% endfor %}
     </tr>
     

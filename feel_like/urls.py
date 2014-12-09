@@ -16,6 +16,5 @@ urlpatterns = patterns('',
     url(r'^login/$', 'feel_like.views.login'),
     url(r'^auth/$', 'feel_like.views.auth_view'),
     url(r'^logout/$', 'feel_like.views.logout'),
-    url(r'^home/$', 'cal.views.calendar'),
     url(r'^invalid/$', 'feel_like.views.invalid'),
 )

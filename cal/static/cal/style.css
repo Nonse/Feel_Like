@@ -17,3 +17,24 @@ table td.highlighted {
   background-color:#999;
 }
 
+th {
+    text-align: center;
+}
+
+.cal-times {
+    width: 50px;
+}
+
+.cal-days {
+    width: 13.6%;
+}
+
+.coach-select {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#reservationDetails {
+    text-align: center;
+    margin-top: 20px;
+}

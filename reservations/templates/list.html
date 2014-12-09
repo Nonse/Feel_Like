@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
+{% block menu-reservations %}
+class="active"
+{% endblock %}
 {% block content %}
 <p>
     <a href="#" class="toggle" onclick="showAll(); return false">All</a> | <a href="#" class="toggle" onclick="showInvoiced(); return false">Invoiced</a> | <a href="#" class="toggle" onclick="showNotInvoiced(); return false">Not Invoiced</a> <!-- | <a href="{% url 'reservations.views.create' %}">New Reservation</a> -->

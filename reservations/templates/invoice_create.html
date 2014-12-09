@@ -12,6 +12,9 @@
                         href="{% static 'css/invoice-create.css' %}"
 />
 {% endblock %}
+{% block menu-invoices %}
+class="active"
+{% endblock %}
 {% block content %}
 <form method="POST" action=".">
     {% csrf_token %}

@@ -15,7 +15,7 @@ def auth_view(request):
     
     if user is not None:
         auth.login(request, user)
-        return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect('/')
     else:
         return HttpResponseRedirect('/invalid/')
 
@@ -24,5 +24,5 @@ def invalid(request):
         
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/home/')
+    return HttpResponseRedirect('/')
     
