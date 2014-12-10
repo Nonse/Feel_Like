@@ -29,8 +29,6 @@
     <div class="header">
       <ul class="nav nav-pills pull-right">
         <li {% block menu-home %}{% endblock %}><a href="{% url 'cal.views.calendar' %}">Home</a></li>
-        <li {% block menu-about %}{% endblock %}><a href="#">About</a></li>
-        <li {% block menu-contact %}{% endblock %}><a href="#">Contact</a></li>
         {% if user.is_authenticated %}
         <li {% block menu-customers %}{% endblock %}><a href="{% url 'customer_list' %}">Customers</a></li>
       	<li {% block menu-reservations %}{% endblock %}><a href="{% url 'reservations.views.list' %}">Reservations</a></li>

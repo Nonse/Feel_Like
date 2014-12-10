@@ -9,8 +9,6 @@
 <link rel="stylesheet" type="text/css" href="{% static 'cal/style.css' %}" />
 {% endblock %}
 {% block content %}
-{# header looks like crap, dudes.. #}
-<h1>Calendar Booking</h1>
 <p class="lead"></p>
     <div class="coach-select">
     <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:-7  %}">&lt;&lt; Prev</a>
