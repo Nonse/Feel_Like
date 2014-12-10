@@ -4,8 +4,9 @@ from reservations.models import Reservation, Coach
 
 #duration of one slot in the calendar, also used to create reservations
 timeIncrement = timedelta(minutes=30)
+activeCoach = 1
      
-def calendar(request, mondayParam = None):
+def calendar(request, mondayParam = None, coachParam = None):
     
     #first calendar to load starts on Monday of current week
     today = date.today()
@@ -13,6 +14,11 @@ def calendar(request, mondayParam = None):
         monday = today - timedelta(days=today.weekday())
     else:
         monday = datetime.strptime(mondayParam, "%Y%m%d").date()
+    
+    global activeCoach    
+    #set coach 
+    if coachParam != None:
+        activeCoach = coachParam
     
     #fill list with days of week displayed
     weekdates = [ monday + timedelta(days=x) for x in range(0, 7)] 
@@ -28,7 +34,7 @@ def calendar(request, mondayParam = None):
     
     #query for reservations .select_related gets connects coach and customer tables
     coaches = Coach.objects.all()
-    reservations = Reservation.objects.all().select_related(
+    reservations = Reservation.objects.filter(coach = activeCoach).select_related(
     'coach__last_name' 
     'coach__first_name' 
     'customer__last_name' 
@@ -49,6 +55,7 @@ def calendar(request, mondayParam = None):
     'reservations': reservations, 
     'startTimes': startTimes, 
     'coaches': coaches,
+    'activeCoach' : activeCoach,
     'today': today}
     if request.user.is_authenticated():
         return render(request, 'cal/calendar.html', context)
