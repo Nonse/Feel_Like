@@ -34,7 +34,7 @@
       	<li {% block menu-reservations %}{% endblock %}><a href="{% url 'reservations.views.list' %}">Reservations</a></li>
       	<li {% block menu-invoices %}{% endblock %}><a href="{% url 'invoice_list' %}">Invoices</a></li>
         <li><a href="{% url 'feel_like.views.logout' %}">Logout</a></li>
-        <li><a href="{% url 'admin:index' %}" class="btn btn-default delete">
+        <li><a href="{% url 'admin:index' %}" class="btn btn-default">
       <span class="glyphicon glyphicon-cog"></span></a></li>
         {% else %}
         <li><a href="{% url 'feel_like.views.login' %}">Login</a></li>
