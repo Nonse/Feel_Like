@@ -16,15 +16,15 @@ class="active"
 <p class="lead"></p>
 
 <form method="get" action="{% url 'reservations.views.create' %}">
-    <div class="coach-select">
+  <div class="coach-select">
     <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:-7  %}">&lt;&lt; Prev</a>
     <select>
-        {% for coach in coaches %}
-            <option value="{{coach.pk}}">{{coach.first_name }} {{coach.last_name}}</option>    
-        {% endfor %}
+      {% for coach in coaches %}
+      <option value="{{coach.pk}}">{{coach.first_name }} {{coach.last_name}}</option>    
+      {% endfor %}
     </select>
     <a href="{% url 'cal.views.calendar' weekdates|first|timedeltaDays:7  %}">Next &gt;&gt;</a>
-</div>
+  </div>
   <table id="calendar">
     <tr>
       <th class="cal-times"></th>
@@ -32,7 +32,7 @@ class="active"
       <th class="cal-days" id="{{day|date:"l"}}">{{day|date:"l"}}<br>{{day|date:"j F"}}</th>
       {% endfor %}
     </tr>
-    
+
     {% for hour in hours %}
     <tr>
       <th>{{hour|date:"H:i"}}</th>
@@ -57,14 +57,14 @@ class="active"
     {% endfor %}
   </tr>
   {% endfor %}
-  
-  
+
+
 </table>
 
 <div id="reservationDetails">
-<input type="hidden" value="" name="startTime">
-<input type="hidden" value="" name="endTime">
-<input type="submit" value="Make reservation">
+  <input type="hidden" value="" name="startTime">
+  <input type="hidden" value="" name="endTime">
+  <input type="submit" value="Make reservation">
 </div>
 
 </form>
