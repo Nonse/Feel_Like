@@ -4,9 +4,13 @@
 class="active"
 {% endblock %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ul.css' %}" />
+<div class="slider">
 <ul>
+
 	{% for customer in customers %}
-	<li>{{ customer.last_name }}, {{ customer.first_name}}
+	<li>{{ customer.last_name }}, {{ customer.first_name}}  <div class="slider">
+
 		<a href="{% url 'customer_edit' customer.id %}" class="btn btn-default">
 			<span class="glyphicon glyphicon-pencil"></span>
 		</a>
@@ -16,6 +20,7 @@ class="active"
 	</li>
 	{% endfor %}
 </ul>
+</div>
 {% endblock %}
 {% block javascript %}
 <script type="text/javascript" src="{% static 'js/customer_list.js' %}">
