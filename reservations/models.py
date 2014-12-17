@@ -11,7 +11,7 @@ class Reservation(models.Model):
     location_price = models.DecimalField(max_digits=10, decimal_places=2)
     participants = models.IntegerField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    invoice = models.ForeignKey('Invoice', null=True, blank=True)
+    invoice = models.ForeignKey('Invoice', null=True, blank=True, on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return u'%s-%s' % (self.start_time.strftime('%Y-%m-%d, %H:%M'), self.end_time.strftime('%H:%M'))
