@@ -229,3 +229,14 @@ def invoice_delete(request, id):
     invoice = get_object_or_404(Invoice, id=id)
     invoice.delete()
     return redirect('invoice_list')
+
+
+@login_required()
+def invoice_print(request, id):
+    invoice = get_object_or_404(Invoice, id=id)
+    company = Company.objects.all()[0]
+    
+    return render(request, 'invoice_print.html', {
+        'invoice': invoice,
+        'company': company
+    })

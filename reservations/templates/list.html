@@ -43,7 +43,8 @@ class="active"
                     Product: {{ r.product }}<br>
                     Location: {{ r.location }}<br>
                     Participants: {{ r.participants }}<br>
-                    <strong>Invoice {{ r.invoice.id }} dated {{ r.invoice.date }}</strong>
+                    <strong>Invoice {{ r.invoice.id }} dated {{ r.invoice.date }}</strong> | 
+                    <a href="{% url 'invoice_print' r.invoice.id %}">Print</a>
                 </li>
 	    {% endfor %}
     </ul>

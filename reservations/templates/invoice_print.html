@@ -1,8 +1,9 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <head>
-  <title>Finnish invoice template</title>
+  <title>Invoice {{ invoice.id }}</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="source.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/invoice.css' %}"> 
 </head>
 <div class="page">
   <div class="content">
@@ -27,34 +28,10 @@
         <ul class="recipient-bank--iban--list">
           <li>
             <span class="recipient-bank--iban--list--bank">
-              SAMPO PANKKI
+              DANSKE
             </span>
             <span class="recipient-bank--iban--list--number">
-              FI16 8000 1400 0502 67
-            </span>
-          </li>
-          <li>
-            <span class="recipient-bank--iban--list--bank">
-              NORDEA
-            </span>
-            <span class="recipient-bank--iban--list--number">
-              FI00 2001 3000 0012 34
-            </span>
-          </li>
-          <li>
-            <span class="recipient-bank--iban--list--bank">
-              OP
-            </span>
-            <span class="recipient-bank--iban--list--number">
-              FI21 5234 5600 0007 85
-            </span>
-          </li>
-          <li>
-            <span class="recipient-bank--iban--list--bank">
-              AKTIA
-            </span>
-            <span class="recipient-bank--iban--list--number">
-              FI16 8000 1400 0502 67
+              {{ company.iban }}
             </span>
           </li>
         </ul>
@@ -65,9 +42,6 @@
       <span class="recipient-bank--bic">
         <ul class="recipient-bank--bic--list">
           <li>DABAFIHH</li>
-          <li>NDEAFIHH</li>
-          <li>OKOYFIHH</li>
-          <li>HELSFIHH</li>
         </ul>
       </span>
     </div>
@@ -76,9 +50,9 @@
         <span>Recipient</span>
       </label>
       <span class="recipient--name">
-        OY YRITYS AB<br>
-        YRITYSKUJA 12, 4. KRS<br>
-        12345 KAUPUNKI<br>
+        {{ company.name|upper }}<br>
+        {{ company.street_address|upper}}<br>
+        {{ company.postcode|upper }} {{ company.city|upper }}<br>
       </span>
     </div>
     <div class="payer">
@@ -86,9 +60,9 @@
         <span>Payer’s name and address</span>
       </label>
       <span class="payer--personal">
-        MAIJA MAKSAJA<br>
-        VIIVATIE 15<br>
-        09999 KOODILA
+        {{ invoice.customer.first_name|upper }} {{ invoice.customer.last_name|upper }}<br>
+        {{ invoice.customer.street_address|upper }}<br>
+        {{ invoice.customer.postcode }} {{ invoice.customer.city|upper }}
       </span>
       <label class="payer--signature--label">
         <span>
@@ -102,33 +76,45 @@
         <span>From account no.</span>
       </label>
       <span class="payer--from-account">
-        123456-7890
+        ????
       </span>
     </div>
     <div class="payment">
       <span class="payment--info">
-        Osuuteni itsenäisyyspäivän lounaasta. t. Maijа
+        {% for r in invoice.reservation_set.all %}
+        {{ r.product }} 
+        {{ r.start_time|date:'d.m.Y H:i' }} - 
+        {{ r.end_time|date:'H:i' }} 
+        <br/>
+        {% endfor %}
       </span>
       <label class="payment--reference--label">
         <span>Ref. No. </span>
       </label>
       <span class="payment--reference">
-        12 34561
+        {{ invoice.ref_number }}
       </span>
       <label class="payment--due--label">
         Due date
       </label>
       <span class="payment--due">
-        30.11.2010
+        {{ invoice.due_date|date:'d.m.Y' }}
       </span>
       <label class="payment--amount--label">
         Euro
       </label>
       <span class="payment--amount">
-        50,00
+        {{ invoice.total }}
       </span>
     </div>
     <div class="barcode">
     </div>
   </div>
+  <button type="button" class="btn btn-default print">
+    Print
+  </button>
 </div>
+<script src="{% static "cal/js/jquery/jquery.js" %}"></script>
+<script type="text/javascript"
+        src="{% static 'js/invoice_print.js' %}">
+</script>

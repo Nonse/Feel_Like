@@ -28,4 +28,6 @@ urlpatterns = patterns('',
         name='invoice_list'),
     url(r'^invoice/(?P<id>\d+)/delete/$', views.invoice_delete,
         name='invoice_delete'),
+   url(r'^invoice/(?P<id>\d+)/print/$', views.invoice_print,
+        name='invoice_print')
 )
