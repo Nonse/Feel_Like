@@ -55,7 +55,7 @@ def calendar(request, mondayParam = None, coachParam = None):
     'reservations': reservations, 
     'startTimes': startTimes, 
     'coaches': coaches,
-    'activeCoach' : activeCoach,
+    'activeCoach' : int(activeCoach),
     'today': today}
     if request.user.is_authenticated():
         return render(request, 'cal/calendar.html', context)
