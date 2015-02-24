@@ -1,4 +1,8 @@
-# Instructions
+# Feel Like is a booking and invoicing app, that was created using Django (https://github.com/django/django). All documentation is available online here http://www.systemo.fi/booktheservice/documentation/.
+
+# The application is licensed under Apache 2.0 Version.
+
+# Running the application
 
 ## Setting Virtual environment
 
